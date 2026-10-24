@@ -18,17 +18,20 @@ otherwise export your drawing to DXF.
 
 ## Claude Desktop integration
 
-```json
-{
-  "mcpServers": {
-    "autocad": {
-      "command": "python",
-      "args": ["-m", "src.server"],
-      "cwd": "/path/to/autocad-mcp-server"
-    }
-  }
-}
-```
+1. Install dependencies (`pip install -r requirements.txt`) with the same Python that Claude Desktop will launch.
+2. Open the config file (Claude Desktop: Settings > Developer > Edit Config):
+   - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
+   - Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+3. Merge in the `mcpServers` entry from [`claude_desktop_config.example.json`](claude_desktop_config.example.json),
+   replacing `/absolute/path/to/autocad-mcp-server` with your clone's absolute path
+   (on Windows use `C:\\path\\to\\autocad-mcp-server`). If `python` isn't the right
+   interpreter, use its full path (e.g. your virtualenv's `python`) as `command`.
+4. Fully quit and restart Claude Desktop. The `autocad` tools should appear in the tools menu.
+5. Try: *"Load /path/to/plan.dxf and list its layers."* Use absolute file paths.
+
+For `.dwg` files the ODA File Converter must be installed and findable by the server
+(on `PATH`, or configured in ezdxf); otherwise use DXF. Logs are in Claude's MCP log files
+(`mcp-server-autocad.log`).
 
 See `example_usage.py` for a programmatic client.
 

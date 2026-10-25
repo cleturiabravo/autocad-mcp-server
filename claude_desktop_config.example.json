@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "autocad": {
+      "command": "python",
+      "args": ["-m", "src.server"],
+      "cwd": "/absolute/path/to/autocad-mcp-server",
+      "env": {
+        "PYTHONPATH": "/absolute/path/to/autocad-mcp-server"
+      }
+    }
+  }
+}
